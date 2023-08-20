@@ -5,16 +5,15 @@
 
     <parent>
         <groupId>com.food.order</groupId>
-        <artifactId>order-service</artifactId>
+        <artifactId>common</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>order-domain</artifactId>
+    <artifactId>common-domain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>order-domain</name>
-    <description>order-domain</description>
-    <packaging>pom</packaging>
+    <name>common-domain</name>
+    <description>common-domain</description>
 
     <dependencies>
     </dependencies>

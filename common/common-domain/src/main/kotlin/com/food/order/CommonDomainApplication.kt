@@ -1,11 +1,11 @@
-package com.food.order.order.domain
+package com.food.order
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class OrderDomainApplication
+class CommonDomainApplication
 
 fun main(args: Array<String>) {
-    runApplication<OrderDomainApplication>(*args)
+    runApplication<CommonDomainApplication>(*args)
 }
