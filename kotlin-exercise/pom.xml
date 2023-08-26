@@ -5,19 +5,16 @@
 
     <parent>
         <groupId>com.food.order</groupId>
-        <artifactId>order-service</artifactId>
+        <artifactId>food-order-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>order-domain</artifactId>
+    <groupId>com.food.kotlin</groupId>
+    <artifactId>kotlin-exercise</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>order-domain</name>
-    <description>order-domain</description>
-    <packaging>pom</packaging>
+    <name>kotlin-exercise</name>
+    <description>kotlin-exercise</description>
 
-    <modules>
-        <module>order-domain-core</module>
-    </modules>
 
     <dependencies>
     </dependencies>
