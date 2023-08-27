@@ -4,7 +4,7 @@ import com.food.order.valueobject.RestaurantId
 
 class Restaurant(id: RestaurantId,
     var products: List<Product>,
-    var isActive: Boolean
+    var isActive: Boolean? = null
 
 ) : AggregateRoot<RestaurantId>(id) {
 

@@ -11,9 +11,6 @@
 	</parent>
 
 	<artifactId>order-domain-core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>order-domain-core</name>
-	<description>order-domain-core</description>
 
 	<dependencies>
 		<dependency>

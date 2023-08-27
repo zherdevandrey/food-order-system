@@ -6,5 +6,4 @@ data class StreetAddress(
     val id: UUID,
     val street: String,
     val postalCode: String,
-    val city: String) {
-}
+    val city: String)

@@ -2,24 +2,24 @@ package com.food.order.entity
 
 import com.food.order.exception.OrderDomainException
 import com.food.order.valueobject.*
-import java.math.BigDecimal
 import java.util.*
-import java.util.function.BinaryOperator
 import java.util.stream.Collectors
-import kotlin.collections.ArrayList
 
 class Order(
-    id: OrderId,
     val customerId: CustomerId,
     val restaurantId: RestaurantId,
     val streetAddress: StreetAddress,
     val price: Money,
-    val items: List<OrderItem>
+    val items: List<OrderItem>,
 
-) : AggregateRoot<OrderId>(id) {
-    private lateinit var trackingId: TrackingId
-    private lateinit var orderStatus: OrderStatus
-    private lateinit var failureMessages: java.util.ArrayList<String>
+    ) : AggregateRoot<OrderId>() {
+    lateinit var trackingId: TrackingId
+    lateinit var orderStatus: OrderStatus
+    lateinit var failureMessages: java.util.ArrayList<String>
+
+    fun getNotNullOrderId(): OrderId {
+        return this.id ?: throw OrderDomainException("Order id is not set")
+    }
 
     fun pay() {
         if (orderStatus != OrderStatus.PENDING) {
@@ -35,7 +35,7 @@ class Order(
         orderStatus = OrderStatus.APPROVED
     }
 
-    fun cancel(failureMessages:List<String>) {
+    fun cancel(failureMessages: List<String>) {
         if (orderStatus != OrderStatus.PAID || orderStatus != OrderStatus.PENDING) {
             throw OrderDomainException("Order is not in correct state for cancel operation")
         }
@@ -43,7 +43,7 @@ class Order(
         updateFailureMessages(failureMessages)
     }
 
-    fun initCancel(failureMessages:List<String>) {
+    fun initCancel(failureMessages: List<String>) {
         if (orderStatus != OrderStatus.PAID) {
             throw OrderDomainException("Order is not in correct state for initCancel operation")
         }
@@ -79,7 +79,7 @@ class Order(
     }
 
     private fun validateItemsPrice() {
-        val totalOrderItemsPrice:Money = items.stream()
+        val totalOrderItemsPrice: Money = items.stream()
             .map(OrderItem::subTotal)
             .reduce(Money.ZERO) { money: Money, other: Money -> money.add(other) }
 
@@ -90,7 +90,10 @@ class Order(
 
     private fun validateItemPrice(item: OrderItem) {
         if (!item.isPriceValid()) {
-            throw OrderDomainException("Order item price ${item.price.amount} is not valid for product ${item.product.id.id}")
+            throw OrderDomainException(
+                "Order item price ${item.price.amount} " +
+                        "is not valid for product ${item.product.id?.id}"
+            )
         }
     }
 
@@ -103,7 +106,8 @@ class Order(
 
     private fun initializeOrderItems() {
         for ((id, item) in items.withIndex()) {
-            item.initializeOrderItem(super.id, OrderItemId(id.toLong()))
+            val orderId = super.id ?: throw OrderDomainException("Order id is not set")
+            item.initializeOrderItem(orderId, OrderItemId(id.toLong()))
         }
     }
 

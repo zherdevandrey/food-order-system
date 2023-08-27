@@ -1,5 +1,5 @@
 package com.food.order.entity
 
-abstract class AggregateRoot<ID>(id: ID) : BaseEntity<ID>(id) {
+abstract class AggregateRoot<ID>(id: ID? = null) : BaseEntity<ID>(id) {
 
 }
