@@ -4,6 +4,7 @@ import com.food.order.dto.create.CreateOrderCommand
 import com.food.order.dto.create.CreateOrderResponse
 import com.food.order.dto.create.OrderAddress
 import com.food.order.dto.create.OrderItem
+import com.food.order.dto.track.TrackOrderResponse
 import com.food.order.entity.Order
 import com.food.order.entity.Product
 import com.food.order.entity.Restaurant
@@ -16,10 +17,8 @@ import java.util.stream.Collectors
 class OrderDataMapper {
     fun createOrderCommandToRestaurant(createOrderCommand: CreateOrderCommand): Restaurant {
         val orderItems = createOrderCommand.orderItems
-        val productIds = orderItems.stream()
-            .map { ProductId(it.productId) }
-            .map { Product(it) }
-            .collect(Collectors.toList())
+        val productIds =
+            orderItems.stream().map { ProductId(it.productId) }.map { Product(it) }.collect(Collectors.toList())
 
         return Restaurant(RestaurantId(createOrderCommand.restaurantId), productIds)
     }
@@ -35,8 +34,7 @@ class OrderDataMapper {
     }
 
     private fun orderItemsToOrderItemEntities(orderItems: List<OrderItem>): List<com.food.order.entity.OrderItem> {
-        return orderItems.stream()
-            .map { orderItem ->
+        return orderItems.stream().map { orderItem ->
                 com.food.order.entity.OrderItem(
                     Product(ProductId(orderItem.productId)),
                     orderItem.quantity,
@@ -52,9 +50,13 @@ class OrderDataMapper {
 
     fun orderToCreateOrderResponse(order: Order, message: String): CreateOrderResponse {
         return CreateOrderResponse(
-            order.getNotNullOrderId().id,
-            order.orderStatus,
-            message
+            order.getNotNullOrderId().id, order.orderStatus, message
+        )
+    }
+
+    fun orderToTrackOrderResponse(order: Order): TrackOrderResponse? {
+        return TrackOrderResponse(
+            order.trackingId.id, order.orderStatus, order.failureMessages
         )
     }
 
