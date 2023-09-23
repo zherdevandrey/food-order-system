@@ -23,11 +23,11 @@ internal class OrderApplicationServiceImpl(
 
     private val log = LoggerFactory.getLogger(OrderApplicationService::class.java)
 
-    override fun createOrder(createOrderCommand: CreateOrderCommand): CreateOrderResponse? {
+    override fun createOrder(createOrderCommand: CreateOrderCommand): CreateOrderResponse {
         return orderCreateCommandHandler.createOrder(createOrderCommand)
     }
 
-    override fun trackOrder(trackOrderQuery: TrackOrderQuery): TrackOrderResponse? {
+    override fun trackOrder(trackOrderQuery: TrackOrderQuery): TrackOrderResponse {
         return orderTrackCommandHandler.trackOrder(trackOrderQuery)
     }
 }

@@ -8,7 +8,7 @@ import jakarta.validation.Valid
 
 interface OrderApplicationService {
 
-    fun createOrder(@Valid createOrderCommand: CreateOrderCommand): CreateOrderResponse?
-    fun trackOrder(@Valid trackOrderQuery: TrackOrderQuery): TrackOrderResponse?
+    fun createOrder(@Valid createOrderCommand: CreateOrderCommand): CreateOrderResponse
+    fun trackOrder(@Valid trackOrderQuery: TrackOrderQuery): TrackOrderResponse
 
 }

@@ -54,7 +54,7 @@ class OrderDataMapper {
         )
     }
 
-    fun orderToTrackOrderResponse(order: Order): TrackOrderResponse? {
+    fun orderToTrackOrderResponse(order: Order): TrackOrderResponse {
         return TrackOrderResponse(
             order.trackingId.id, order.orderStatus, order.failureMessages
         )

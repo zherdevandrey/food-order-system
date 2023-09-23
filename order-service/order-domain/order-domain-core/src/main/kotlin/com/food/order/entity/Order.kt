@@ -10,8 +10,7 @@ class Order(
     val restaurantId: RestaurantId,
     val streetAddress: StreetAddress,
     val price: Money,
-    val items: List<OrderItem>,
-
+    val items: List<OrderItem>
     ) : AggregateRoot<OrderId>() {
     lateinit var trackingId: TrackingId
     lateinit var orderStatus: OrderStatus
@@ -67,20 +66,25 @@ class Order(
     }
 
     fun validateOrder() {
-        if (orderStatus != null || id != null) {
+        if (this::orderStatus.isInitialized || id != null) {
             throw OrderDomainException("Order is not in correct state for initialization")
         }
+        validatePrice();
+        validateItemsPrice()
     }
 
     private fun validatePrice() {
-        if (price == null || !price.isGreaterThenZero()) {
+        if (!price.isGreaterThenZero()) {
             throw OrderDomainException("Total price must be greater then zero")
         }
     }
 
     private fun validateItemsPrice() {
         val totalOrderItemsPrice: Money = items.stream()
-            .map(OrderItem::subTotal)
+            .map {
+                validateItemPrice(it)
+                it.price
+            }
             .reduce(Money.ZERO) { money: Money, other: Money -> money.add(other) }
 
         if (totalOrderItemsPrice != price) {

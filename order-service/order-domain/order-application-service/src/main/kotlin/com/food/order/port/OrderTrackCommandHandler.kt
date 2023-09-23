@@ -19,7 +19,7 @@ internal class OrderTrackCommandHandler(
 
     private val log = LoggerFactory.getLogger(OrderCreateCommandHandler::class.java)
 
-    fun trackOrder(trackOrderQuery: TrackOrderQuery): TrackOrderResponse? {
+    fun trackOrder(trackOrderQuery: TrackOrderQuery): TrackOrderResponse {
         val order = orderRepository
             .findByTrackingId(TrackingId(trackOrderQuery.orderTrackingId))
             ?: throw OrderNotFoundException("Order not found with tracking id : +  " + trackOrderQuery.orderTrackingId)
