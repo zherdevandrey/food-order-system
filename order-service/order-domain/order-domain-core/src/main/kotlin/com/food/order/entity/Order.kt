@@ -83,7 +83,7 @@ class Order(
         val totalOrderItemsPrice: Money = items.stream()
             .map {
                 validateItemPrice(it)
-                it.price
+                it.subTotal
             }
             .reduce(Money.ZERO) { money: Money, other: Money -> money.add(other) }
 
