@@ -1,4 +1,4 @@
-package com.food.order.service.impl
+package com.food.order.service
 
 import com.food.order.entity.Order
 import com.food.order.entity.Restaurant

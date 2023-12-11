@@ -7,7 +7,7 @@ import com.food.order.port.output.repository.CustomerRepository
 import com.food.order.port.output.repository.OrderRepository
 import com.food.order.port.output.repository.RestaurantRepository
 import com.food.order.service.OrderDomainService
-import com.food.order.service.impl.OrderDomainServiceImpl
+import com.food.order.service.OrderDomainServiceImpl
 import org.mockito.Mockito
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean

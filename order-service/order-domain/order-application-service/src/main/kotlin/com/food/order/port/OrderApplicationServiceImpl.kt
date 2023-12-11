@@ -5,7 +5,7 @@ import com.food.order.dto.create.CreateOrderResponse
 import com.food.order.dto.track.TrackOrderQuery
 import com.food.order.dto.track.TrackOrderResponse
 import com.food.order.port.input.service.OrderApplicationService
-import com.food.order.service.impl.OrderDomainServiceImpl
+import com.food.order.service.OrderDomainServiceImpl
 import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.LoggerFactory
