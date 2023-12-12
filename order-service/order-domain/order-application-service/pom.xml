@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>com.food.order</groupId>
-            <artifactId>order-domain-core</artifactId>
+            <artifactId>order-core-domain</artifactId>
         </dependency>
 
         <dependency>

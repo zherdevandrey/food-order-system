@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>order-domain-core</module>
+        <module>order-core-domain</module>
         <module>order-application-service</module>
     </modules>
 

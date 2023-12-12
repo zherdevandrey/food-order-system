@@ -1,7 +1,5 @@
 package com.food.order.exception
 
-import com.food.order.ErrorDTO
-import com.food.order.api.OrderController
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -22,10 +20,7 @@ class OrderGlobalException {
     @ResponseBody
     fun handleOrderDomainException(e: OrderDomainException): ErrorDTO {
         log.error("Error occurred: {}", e.message)
-        return ErrorDTO.builder()
-            .code(HttpStatus.BAD_REQUEST.reasonPhrase)
-            .message(e.message)
-            .build()
+        return ErrorDTO(HttpStatus.BAD_REQUEST.reasonPhrase, e.message)
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -33,10 +28,7 @@ class OrderGlobalException {
     @ResponseBody
     fun handleOrderDomainException(e: OrderNotFoundException): ErrorDTO {
         log.error("Error occurred: {}", e.message)
-        return ErrorDTO.builder()
-            .code(HttpStatus.NOT_FOUND.reasonPhrase)
-            .message(e.message)
-            .build()
+        return ErrorDTO(HttpStatus.NOT_FOUND.reasonPhrase, e.message)
     }
 }
 
